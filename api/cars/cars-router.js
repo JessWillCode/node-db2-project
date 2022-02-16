@@ -14,18 +14,20 @@ router.get('/', (req, res, next) => {
 router.get('/:id', checkCarId, (req, res, next) => {
     res.json(req.car);
 })
-router.post('/:id', checkCarId, checkCarPayload, checkVinNumberValid, checkVinNumberUnique, (req, res, next) => {
-    Car.create(req.car)
+router.post('/', checkCarPayload, 
+checkVinNumberValid, 
+checkVinNumberUnique, (req, res, next) => {
+    Car.create(req.body)
     .then(car => {
         res.json(car);
     })
     .catch(next);
 })
 
-router.use('/', (err, req, res, next) => {
-    res.status(err.status || 500).json({
-        message: err.message
-    })
-})
+// router.use('/', (err, req, res, next) => {
+//     res.status(err.status || 500).json({
+//         message: err.message
+//     })
+// })
 
 module.exports = router;
