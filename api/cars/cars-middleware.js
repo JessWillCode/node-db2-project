@@ -11,6 +11,7 @@ const checkCarId = (req, res, next) => {
       })
     } else {
       req.car = id;
+      next();
     }
   })
   .catch(next)
